@@ -1,3 +1,3 @@
 # Tipos Hash
 
-Estudo sobre tipos de criptografia e sua aplicação com **JAVA**
+Estudo sobre tipos de criptografia e sua aplicação com **Java**
