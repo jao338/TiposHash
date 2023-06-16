@@ -1,4 +1,4 @@
-package com.mycompany.hash;
+package com.mycompany.hash.Classes;
 
 import java.security.MessageDigest;
 
@@ -27,7 +27,7 @@ public class MD5 {
             //Pega os bytes do hash
             byte[] bytes = md.digest();
 
-            //Estes bytes estão em formato decimal, converta em hexadecimal
+            //Estes bytes estão em formato decimal, converta para hexadecimal
             for (int i = 0; i < bytes.length; i++) {
               sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
