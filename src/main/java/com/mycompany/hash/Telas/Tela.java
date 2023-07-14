@@ -1,5 +1,7 @@
 package com.mycompany.hash.Telas;
 import com.mycompany.hash.Classes.MD5;
+import com.mycompany.hash.Classes.SALT;
+import com.mycompany.hash.Classes.SHA;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import javax.swing.JOptionPane;
@@ -10,8 +12,9 @@ public class Tela extends javax.swing.JFrame {
         initComponents();
     }
     
+    SALT var0 = new SALT();
     MD5 var1 = new MD5();
-    
+    SHA var2 = new SHA();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -90,19 +93,19 @@ public class Tela extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addGap(77, 77, 77)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 845, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,23 +113,22 @@ public class Tela extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel5)
                 .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(12, 12, 12)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(69, 69, 69)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -134,9 +136,7 @@ public class Tela extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1147, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,14 +160,36 @@ public class Tela extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Botão/Ver
         
-        if(jComboBox1.getSelectedIndex() == 0){
+        if(jTextField1.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Digite uma senha antes de continuar!!!");
             
-            try {
-                jTextPane1.setText("A senha original é " + jTextField1.getText() + "\nA senha criptografada é " + var1.Hash(jTextField1.getText(), var1.getSalt()));
-            } catch (NoSuchAlgorithmException ex) {
-                JOptionPane.showMessageDialog(null, "Algo deu errado");
-            } catch (NoSuchProviderException ex) {
-                JOptionPane.showMessageDialog(null, "Algo deu errado");
+        }else{
+            
+            if(jComboBox1.getSelectedIndex() == 0) {
+
+                try{
+                    jTextPane1.setText("O tipo de hash escolhido foi MD5\nA senha original é " + jTextField1.getText() + "\nA senha criptografada é " + var1.MD5(jTextField1.getText(), var0.getSalt()));
+                }catch (NoSuchAlgorithmException ex) {
+                    JOptionPane.showMessageDialog(null, "Algo deu errado");
+                }catch (NoSuchProviderException ex) {
+                    JOptionPane.showMessageDialog(null, "Algo deu errado");
+                }
+
+            }else if(jComboBox1.getSelectedIndex() == 1) {
+
+                try{
+                    jTextPane1.setText("O tipo de hash escolhido foi SHA\nA senha original é " + jTextField1.getText() + "\nA senha criptografada usando 160 bits é "
+                            + var2.SHA_1(jTextField1.getText(), var0.getSalt()) + "\nA senha criptografada usando 256 bits é "
+                            + var2.SHA_256(jTextField1.getText(), var0.getSalt()) + "\nA senha criptografada usando 384 bits é "
+                            + var2.SHA_384(jTextField1.getText(), var0.getSalt()) + "\nA senha criptografada usando 512 bits é "
+                            + var2.SHA_512(jTextField1.getText(), var0.getSalt()));
+                    
+                }catch (NoSuchAlgorithmException ex) {
+                    JOptionPane.showMessageDialog(null, "Algo deu errado");
+                }catch (NoSuchProviderException ex) {
+                    JOptionPane.showMessageDialog(null, "Algo deu errado");
+                }
             }
 
         }

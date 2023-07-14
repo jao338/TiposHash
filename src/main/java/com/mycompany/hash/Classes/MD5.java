@@ -1,9 +1,6 @@
 package com.mycompany.hash.Classes;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
 
 public class MD5 {
     
@@ -11,13 +8,13 @@ public class MD5 {
         
     }
     
-    public String Hash (String hash, String salt){
+    public String MD5 (String hash, String salt){
         
         String resultado = null;
         
         try {
             
-            // Criar uma instância MessageDigest para MD5
+            // Cria uma instância MessageDigest para MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
             
             // Essa classe permite criar e manipular dados de Strings
@@ -43,22 +40,7 @@ public class MD5 {
             System.out.println("Erro: " + e);
         }
         
-        // Retorna a variável "resultado"
         return resultado;
     };
     
-    public String getSalt() throws NoSuchAlgorithmException, NoSuchProviderException {
-    // A classe SecureRandom é usada para gerar números pseudo-aleatórios
-    
-    SecureRandom sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
-
-    // Cria um array
-    byte[] salt = new byte[16];
-
-    // Gera um salt "aleatório"
-    sr.nextBytes(salt);
-
-    // retorna o salt
-    return salt.toString();
-}
 }
