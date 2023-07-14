@@ -1,4 +1,5 @@
 package com.mycompany.hash.Telas;
+import com.mycompany.hash.Classes.BCRYPT;
 import com.mycompany.hash.Classes.MD5;
 import com.mycompany.hash.Classes.PBK;
 import com.mycompany.hash.Classes.SALT;
@@ -6,8 +7,6 @@ import com.mycompany.hash.Classes.SHA;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Tela extends javax.swing.JFrame {
@@ -20,6 +19,7 @@ public class Tela extends javax.swing.JFrame {
     MD5 var1 = new MD5();
     SHA var2 = new SHA();
     PBK var3 = new PBK();
+    BCRYPT var4 = new BCRYPT();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,7 +48,7 @@ public class Tela extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Escolha um hash:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MD5", "SHA", "PBK" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MD5", "SHA", "PBK", "BCRYPT" }));
         jComboBox1.setMinimumSize(new java.awt.Dimension(64, 16));
         jComboBox1.setPreferredSize(new java.awt.Dimension(64, 16));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +206,10 @@ public class Tela extends javax.swing.JFrame {
                 } catch (InvalidKeySpecException ex) {
                     JOptionPane.showMessageDialog(null, "Algo deu errado");
                 }
+                
+            }else if(jComboBox1.getSelectedIndex() == 3){
+                
+                jTextPane1.setText("O tipo de hash escolhido foi BCRYPT\nA senha original é " + jTextField1.getText() + "\nA senha criptografada é " + var4.hashpw(jTextField1.getText(), var4.gensalt(12)));
                 
             }
 
