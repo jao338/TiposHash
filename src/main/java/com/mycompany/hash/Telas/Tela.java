@@ -1,9 +1,13 @@
 package com.mycompany.hash.Telas;
 import com.mycompany.hash.Classes.MD5;
+import com.mycompany.hash.Classes.PBK;
 import com.mycompany.hash.Classes.SALT;
 import com.mycompany.hash.Classes.SHA;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Tela extends javax.swing.JFrame {
@@ -15,6 +19,7 @@ public class Tela extends javax.swing.JFrame {
     SALT var0 = new SALT();
     MD5 var1 = new MD5();
     SHA var2 = new SHA();
+    PBK var3 = new PBK();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -43,7 +48,7 @@ public class Tela extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Escolha um hash:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MD5", "SHA" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MD5", "SHA", "PBK" }));
         jComboBox1.setMinimumSize(new java.awt.Dimension(64, 16));
         jComboBox1.setPreferredSize(new java.awt.Dimension(64, 16));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -97,11 +102,13 @@ public class Tela extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 845, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -124,10 +131,10 @@ public class Tela extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addGap(110, 110, 110)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -190,6 +197,16 @@ public class Tela extends javax.swing.JFrame {
                 }catch (NoSuchProviderException ex) {
                     JOptionPane.showMessageDialog(null, "Algo deu errado");
                 }
+            }else if(jComboBox1.getSelectedIndex() == 2){
+                
+                try{
+                    jTextPane1.setText("O tipo de hash escolhido foi PBK\nA senha original é " + jTextField1.getText() + "\nA senha criptografada é " + var3.PBK(jTextField1.getText()));
+                }catch (NoSuchAlgorithmException ex) {
+                    JOptionPane.showMessageDialog(null, "Algo deu errado");
+                } catch (InvalidKeySpecException ex) {
+                    JOptionPane.showMessageDialog(null, "Algo deu errado");
+                }
+                
             }
 
         }
@@ -200,6 +217,7 @@ public class Tela extends javax.swing.JFrame {
         
         jTextField1.setText("");
         jTextPane1.setText("");
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
